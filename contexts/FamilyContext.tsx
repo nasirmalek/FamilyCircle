@@ -54,12 +54,14 @@ export function FamilyProvider({ children }: { children: ReactNode }) {
       setLoading(true);
       const supabase = getSupabaseClient();
 
-      // Get user's family membership
+      // Get user's family memberships (user can be in multiple families)
       const { data: memberData, error: memberError } = await supabase
         .from('family_members')
-        .select('family_id')
+        .select('family_id, joined_at')
         .eq('user_id', user.id)
-        .maybeSingle();
+        .order('joined_at', { ascending: false })
+        .limit(1)
+        .single();
 
       if (memberError) {
         console.error('Load family membership error:', memberError);
