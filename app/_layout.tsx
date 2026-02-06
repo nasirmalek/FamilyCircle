@@ -24,6 +24,14 @@ export default function RootLayout() {
                   animation: 'slide_from_right',
                 }}
               />
+              <Stack.Screen
+                name="event/create"
+                options={{
+                  headerShown: false,
+                  animation: 'slide_from_bottom',
+                  presentation: 'modal',
+                }}
+              />
             </Stack>
           </FamilyProvider>
         </AuthProvider>
