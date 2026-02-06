@@ -44,7 +44,6 @@ export const eventService = {
       `
       )
       .eq('family_id', familyId)
-      .gte('event_date', new Date().toISOString())
       .order('event_date', { ascending: true });
 
     if (error) {
@@ -53,6 +52,7 @@ export const eventService = {
     }
 
     console.log('Events loaded:', data?.length ?? 0);
+    console.log('Events data:', JSON.stringify(data, null, 2));
     return (data ?? []).map(mapDbEventToEvent);
   },
 
