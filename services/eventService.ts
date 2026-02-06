@@ -39,9 +39,14 @@ export const eventService = {
         )
       `)
       .eq('family_id', familyId)
+      .gte('event_date', new Date().toISOString())
       .order('event_date', { ascending: true });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Get events error:', error);
+      throw error;
+    }
+    
     return data || [];
   },
 
